@@ -51,7 +51,6 @@ int main() {
     // Inicializando
     stdio_init_all();
     adc_init();
-
     setup();
     ssd_setup();
  
@@ -94,20 +93,20 @@ int main() {
             float j_step = ((float)y - (float)prev_y)/frame_rate;       // Mudança de passo de j
 
             for(uint8_t k = 0; k < frame_rate; k++){                    // Enquanto tivermos menos que 10 frames
-                ssd1306_fill(&ssd, false);                              // Limpando a tela
+                ssd1306_fill(&ssd, false);                              // Limpando o Display
                 ssd1306_border(&ssd, 0, 0, 128, 64, true, border_mode); // Desenhando a borda
                 ssd1306_draw_char(&ssd, '*',(uint8_t)i, (uint8_t)j);    // Desenhando o quadrado
                 ssd1306_send_data(&ssd);                                // Comunicação com o Display
 
-                i += i_step;                                            // Mudamos a posição de x
-                j += j_step;                                            // Mudamos a posição de y
+                i += i_step;                                            // Mudando a posição de x
+                j += j_step;                                            // Mudando a posição de y
 
-                sleep_ms(100/frame_rate);                               // Delay para legibilidadde do display
+                sleep_ms(100/frame_rate);                               // Delay para legibilidade do Display
             }
         }
 
         // Para garantir que o quadrado esteja no local correto
-        ssd1306_fill(&ssd, false);                                      // Limpando o dispçay
+        ssd1306_fill(&ssd, false);                                      // Limpando o Display
         ssd1306_border(&ssd, 0, 0, 128, 64, true, border_mode);         // Desenhando a borda
         ssd1306_draw_char(&ssd, '*', x, y);                             // Desenhando o quadrado
         ssd1306_send_data(&ssd);                                        // Comunicação com o Display
@@ -150,16 +149,16 @@ static void setup() {
     gpio_set_dir(LED_G, GPIO_OUT);  // Modo de Saída
     gpio_put(LED_G, false);         // Garantir que esteja desligado
 
-    pwm_setup(LED_R, 0);    // LED Vermelho com nível inicial 0
-    pwm_setup(LED_B, 0);    // LED Azul com nível inicial 0
+    pwm_setup(LED_R, 0);    // Inicializando o LED Vermelho com nível inicial 0
+    pwm_setup(LED_B, 0);    // Inicializando o LED Azul com nível inicial 0
 }
 // Configuração do Display
 static void ssd_setup() {
-    ssd1306_init(&ssd, WIDTH, HEIGHT, false, ADDRESS, I2C_PORT); // Inicializando o Display
-    ssd1306_config(&ssd); // Configurando o Display
-    ssd1306_send_data(&ssd); // Enviando informação para o Display
-    ssd1306_fill(&ssd, false); // Limpando o display
-    ssd1306_send_data(&ssd); // Enviando informação para o Display
+    ssd1306_init(&ssd, WIDTH, HEIGHT, false, ADDRESS, I2C_PORT);    // Inicializando o Display
+    ssd1306_config(&ssd);                                           // Configurando o Display
+    ssd1306_send_data(&ssd);                                        // Enviando informação para o Display
+    ssd1306_fill(&ssd, false);                                      // Limpando o display
+    ssd1306_send_data(&ssd);                                        // Enviando informação para o Display
 }
 // Configuração dos pinos PWM
 static void pwm_setup(uint pwm_pin, uint16_t level) {
