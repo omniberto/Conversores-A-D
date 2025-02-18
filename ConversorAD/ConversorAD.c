@@ -84,7 +84,6 @@ int main() {
         pwm_set_gpio_level(LED_B, level(vrv_value));  // LED Azul
         pwm_set_gpio_level(LED_R, level(vrh_value));  // LED Vermelho
 
-        /* Configuração Extra: Para ativar a animação retire esta linha de comentário
         // Se a animação está ativa e houve mudança de posição significativa
         if (animate && (x != prev_x || y != prev_y)) {
 
@@ -105,7 +104,6 @@ int main() {
                 sleep_ms(100/frame_rate);                               // Delay para legibilidade do Display
             }
         }
-        Configuração Extra: Para ativar a animação retire esta linha de comentário */
         
         // Para garantir que o quadrado esteja no local correto
         ssd1306_fill(&ssd, false);                                      // Limpando o Display
@@ -116,7 +114,7 @@ int main() {
         prev_x = x; // Salvando a posição de x para animação
         prev_y = y; // Salvando a posição de y para animação
 
-        sleep_ms(500); // 500 ms de delay para diminuir uso da CPU
+        sleep_ms(400 + !animate * 100); // ~500 ms de delay para diminuir uso da CPU
     }
     return 0;
 }

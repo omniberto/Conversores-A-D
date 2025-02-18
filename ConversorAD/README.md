@@ -22,13 +22,8 @@
         2. Muda o estado do LED Verde.
             1. O LED Verde inicia desligado e alterna entre Ligado e Desligado.
 3. Display: Demonstra a posição dos componentes do Joystick através de um quadrado 8x8 no Display.
-
-4. Feature Extra:
-    1. Comentado no código, está uma rotina que permite que a movimentação periódica no Display (Animação);
+4. Botão B (Feature Extra):
+    1. Existe no código, uma rotina que permite que a movimentação periódica no Display (Animação);
     2. O Botão B controlará se a animação está habilitada ou não;
-    3. Para que seja habilitado esta rotina, o usuário deverá fazer uma simples modificação no código:
-        1. No código haverá duas linhas (87 e 108) comentadas com a seguinte frase: 
-            > "Configuração Extra: Para ativar a animação retire esta linha de comentário"
-        2. Apague a linha completa, compile e rode o programa na placa.
-        3. AVISO: A linha inteira precisa ser removida, incluindo "\\* " e " *\\".
+    3. A animação começará desabilitada;
     4. ESSA FEATURE NÃO FAZ PARTE DA ATIVIDADE.
