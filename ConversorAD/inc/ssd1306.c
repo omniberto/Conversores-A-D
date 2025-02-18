@@ -115,8 +115,7 @@ void ssd1306_rect(ssd1306_t *ssd, uint8_t top, uint8_t left, uint8_t width, uint
 }
 
 void ssd1306_border(ssd1306_t *ssd, uint8_t top, uint8_t left, uint8_t width, uint8_t height, bool value, uint8_t mode) {
-  switch (mode)
-  {
+  switch (mode) {
   case 1:
     for (uint8_t x = left; x < left + width; ++x) {
       ssd1306_pixel(ssd, x, top, value);
@@ -127,6 +126,7 @@ void ssd1306_border(ssd1306_t *ssd, uint8_t top, uint8_t left, uint8_t width, ui
       ssd1306_pixel(ssd, left + width - 1, y, value);
     }
     break;
+
   case 2:
     for (uint8_t x = left; x < left + width; ++x) {
         ssd1306_pixel(ssd, x, top, value);
@@ -141,6 +141,7 @@ void ssd1306_border(ssd1306_t *ssd, uint8_t top, uint8_t left, uint8_t width, ui
           y+=4;
     }
     break;
+
   case 3:
     for (uint8_t x = left + 2; x < left + width - 2; ++x) {
       ssd1306_pixel(ssd, x, top, value);
@@ -161,16 +162,9 @@ void ssd1306_border(ssd1306_t *ssd, uint8_t top, uint8_t left, uint8_t width, ui
         ssd1306_pixel(ssd, left + width - 3 - j, top + height - 3 - i, value);
         ssd1306_pixel(ssd, left + 2 + j, top + height - 3 - i, value);
       }
-      /*
-      
-      ssd1306_pixel(ssd, left + width - 3, top + 3 + i, value);
-      ssd1306_pixel(ssd, left + width - 3, top + 3 + i, value);
-      //ssd1306_pixel(ssd, left + width - 1 - i , top + height - 1 - i, value);
-      //ssd1306_pixel(ssd, left + width - 1 - i, top + 1 + i, value);
-      //ssd1306_pixel(ssd, left + 1 + i, top + height - 1 - i, value);
-      */
     }
     break;
+
   case 4:
     for (uint8_t x = left; x < left + width; ++x) {
       if(x%2){
@@ -191,29 +185,11 @@ void ssd1306_border(ssd1306_t *ssd, uint8_t top, uint8_t left, uint8_t width, ui
       }
     }
     break;
+
   default:
     break;
   }
-  /*
-  for (uint8_t x = left; x < left + width; ++x) {
-    ssd1306_pixel(ssd, x, top, value);
-    ssd1306_pixel(ssd, x, top + height - 1, value);
-  }
-  for (uint8_t y = top; y < top + height; ++y) {
-    ssd1306_pixel(ssd, left, y, value);
-    ssd1306_pixel(ssd, left + width - 1, y, value);
-  }
-
-  if (fill) {
-    for (uint8_t x = left + 1; x < left + width - 1; ++x) {
-      for (uint8_t y = top + 1; y < top + height - 1; ++y) {
-        ssd1306_pixel(ssd, x, y, value);
-      }
-    }
-  }
-    */
 }
-
 
 void ssd1306_line(ssd1306_t *ssd, uint8_t x0, uint8_t y0, uint8_t x1, uint8_t y1, bool value) {
     int dx = abs(x1 - x0);

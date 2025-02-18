@@ -84,6 +84,7 @@ int main() {
         pwm_set_gpio_level(LED_B, level(vrv_value));  // LED Azul
         pwm_set_gpio_level(LED_R, level(vrh_value));  // LED Vermelho
 
+        /* Configuração Extra: Para ativar a animação retire esta linha de comentário
         // Se a animação está ativa e houve mudança de posição significativa
         if (animate && (x != prev_x || y != prev_y)) {
 
@@ -92,7 +93,7 @@ int main() {
             float i_step = ((float)x - (float)prev_x)/frame_rate;       // Mudança de passo de i
             float j_step = ((float)y - (float)prev_y)/frame_rate;       // Mudança de passo de j
 
-            for(uint8_t k = 0; k < frame_rate; k++){                    // Enquanto tivermos menos que 10 frames
+            for(uint8_t k = 0; k < frame_rate; k++) {                    // Enquanto tivermos menos que 10 frames
                 ssd1306_fill(&ssd, false);                              // Limpando o Display
                 ssd1306_border(&ssd, 0, 0, 128, 64, true, border_mode); // Desenhando a borda
                 ssd1306_draw_char(&ssd, '*',(uint8_t)i, (uint8_t)j);    // Desenhando o quadrado
@@ -104,7 +105,8 @@ int main() {
                 sleep_ms(100/frame_rate);                               // Delay para legibilidade do Display
             }
         }
-
+        Configuração Extra: Para ativar a animação retire esta linha de comentário */
+        
         // Para garantir que o quadrado esteja no local correto
         ssd1306_fill(&ssd, false);                                      // Limpando o Display
         ssd1306_border(&ssd, 0, 0, 128, 64, true, border_mode);         // Desenhando a borda
@@ -114,7 +116,7 @@ int main() {
         prev_x = x; // Salvando a posição de x para animação
         prev_y = y; // Salvando a posição de y para animação
 
-        sleep_ms(400 + !animate * 100); // 500 ms de delay para diminuir uso da CPU
+        sleep_ms(500); // 500 ms de delay para diminuir uso da CPU
     }
     return 0;
 }
@@ -172,7 +174,7 @@ static void pwm_setup(uint pwm_pin, uint16_t level) {
 // Função para converter o valor horizontal do Joystick em uma coordenada no Display
 uint8_t x_convert(uint32_t x_value) {
     float x_position;                                       // Variação da posição (Float permite um valor posicional mais preciso)
-    if (x_value >= 1850 && x_value <= 1990) {               // Se o valor enviado estiver na "Zona Morta"
+    if (x_value >= 1850 && x_value <= 2100) {               // Se o valor enviado estiver na "Zona Morta"
         x_position = 60;                                    // Define como sendo no meio
     } else {
         x_position = (128.0/(VR_MAX - VR_MIN)) * x_value;   // Utiliza-se um coeficiente angular para determinar a posição
@@ -210,18 +212,17 @@ static void gpio_irq_handler(uint gpio, uint32_t events) {
             case BUTTON_A:                                                  // Se for o Botão A
                 pwm_active = !pwm_active;                                   // Muda o estado dos pinos PWM
                 if (pwm_active)                                             // Mostra no Serial qual o estado atual dos PWMs
-                    printf("PWM ACTIVE\n");                                 
+                    printf("PWM ENABLED\n");                                 
                 else
                     printf("PWM DISABLED\n");
                 pwm_set_enabled(pwm_gpio_to_slice_num(LED_B), pwm_active);  // Muda o estado do PWM do LED Vermelho
                 pwm_set_enabled(pwm_gpio_to_slice_num(LED_R), pwm_active);  // Muda o estado do PWM do LED Azul
                 break;
             
-
             case BUTTON_B:                                                  // Se for o botão B                                                          
                 animate = !animate;                                         // Muda o estado da animação
                 if (animate)                                                // Mostra no Serial se a animação está ligada ou não.
-                    printf("ANIMATION ACTIVE\n");
+                    printf("ANIMATION ENABLED\n");
                 else
                     printf("ANIMATION DISABLED\n"); 
                 break;
