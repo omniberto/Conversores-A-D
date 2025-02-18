@@ -30,5 +30,5 @@
         1. No código haverá duas linhas (87 e 108) comentadas com a seguinte frase: 
             > "Configuração Extra: Para ativar a animação retire esta linha de comentário"
         2. Apague a linha completa, compile e rode o programa na placa.
-        3. AVISO: A linha inteira precisa ser removida, incluindo "\\*" e "*\\".
+        3. AVISO: A linha inteira precisa ser removida, incluindo "\\* " e " *\\".
     4. ESSA FEATURE NÃO FAZ PARTE DA ATIVIDADE.
